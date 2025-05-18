@@ -1,0 +1,112 @@
+.teacher-dashboard {
+    background: url('https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=1740&q=80') no-repeat center center/cover;
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 50, 0.8);
+    padding: 1rem 2rem;
+    align-items: center;
+  }
+  
+  .navbar h1 {
+    font-size: 1.8rem;
+    color: #00ffd0;
+  }
+  
+  .navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+  
+  .navbar li {
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .navbar li:hover {
+    color: #00ffd0;
+    text-decoration: underline;
+  }
+  
+  .welcome-section {
+    text-align: center;
+    margin-top: 50px;
+    animation: fadeInDown 1s ease;
+  }
+  
+  .welcome-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .welcome-section p {
+    font-size: 1.2rem;
+    color: #f0f0f0;
+  }
+  
+  .card-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    padding: 3rem;
+  }
+  
+  .card {
+    background-color: rgba(0, 0, 50, 0.8);
+    padding: 1.5rem;
+    border-radius: 15px;
+    width: 280px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s, background 0.3s;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  }
+  
+  .card:hover {
+    transform: translateY(-10px);
+    background-color: rgba(0, 0, 70, 0.9);
+  }
+  
+  .card img {
+    width: 60px;
+    margin-bottom: 15px;
+  }
+  
+  .card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+  }
+  
+  .card p {
+    color: #dcdcdc;
+    font-size: 0.95rem;
+  }
+  
+  .footer {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: rgba(0, 0, 50, 0.8);
+    margin-top: auto;
+    font-size: 0.9rem;
+  }
+  
+  /* Animations */
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-25px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

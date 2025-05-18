@@ -1,0 +1,30 @@
+.register-container {
+    width: 450px;
+    margin: 100px auto;
+    padding: 2rem;
+    background: lightblue;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ccc;
+  }
+  
+  .register-container h2 {
+    text-align: center;
+  }
+  
+  .register-container form input,
+  .register-container form select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+  }
+  
+  .register-container form button {
+    width: 100%;
+    padding: 10px;
+    background-color: lightblue;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  

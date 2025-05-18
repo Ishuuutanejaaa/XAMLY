@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './CreateExamPage.css';
+import './CreateExam.css';
 
 const CreateExamPage = () => {
   const [examDetails, setExamDetails] = useState({
@@ -9,7 +9,12 @@ const CreateExamPage = () => {
     questions: []
   });
 
-  const [question, setQuestion] = useState({ text: '', options: ['', '', '', ''], correctAnswer: '' });
+  const [question, setQuestion] = useState({
+    text: '',
+    options: ['', '', '', ''],
+    correctAnswer: ''
+  });
+
   const [exams, setExams] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editingExamId, setEditingExamId] = useState(null);
@@ -22,7 +27,14 @@ const CreateExamPage = () => {
   };
 
   const addQuestion = () => {
-    setExamDetails({ ...examDetails, questions: [...examDetails.questions, question] });
+    if (!question.text || question.options.some(opt => !opt) || !question.correctAnswer) {
+      alert('Please complete the question and all options.');
+      return;
+    }
+    setExamDetails({
+      ...examDetails,
+      questions: [...examDetails.questions, { ...question }]
+    });
     setQuestion({ text: '', options: ['', '', '', ''], correctAnswer: '' });
   };
 
@@ -47,7 +59,7 @@ const CreateExamPage = () => {
       setIsEditing(false);
       setEditingExamId(null);
     } else {
-      alert(data.message);
+      alert(data.message || 'Error occurred');
     }
   };
 
@@ -63,7 +75,12 @@ const CreateExamPage = () => {
   };
 
   const handleEdit = (exam) => {
-    setExamDetails(exam);
+    setExamDetails({
+      subject: exam.subject,
+      duration: exam.duration,
+      totalMarks: exam.totalMarks,
+      questions: exam.questions
+    });
     setEditingExamId(exam._id);
     setIsEditing(true);
   };
@@ -75,26 +92,53 @@ const CreateExamPage = () => {
   return (
     <div className="create-exam-page">
       <h2>{isEditing ? 'Edit Exam' : 'Create Exam'}</h2>
-      <input placeholder="Subject" value={examDetails.subject} onChange={(e) => setExamDetails({ ...examDetails, subject: e.target.value })} />
-      <input placeholder="Duration (mins)" value={examDetails.duration} onChange={(e) => setExamDetails({ ...examDetails, duration: e.target.value })} />
-      <input placeholder="Total Marks" value={examDetails.totalMarks} onChange={(e) => setExamDetails({ ...examDetails, totalMarks: e.target.value })} />
+
+      <input
+        placeholder="Subject"
+        value={examDetails.subject}
+        onChange={(e) => setExamDetails({ ...examDetails, subject: e.target.value })}
+      />
+      <input
+        placeholder="Duration (mins)"
+        value={examDetails.duration}
+        onChange={(e) => setExamDetails({ ...examDetails, duration: e.target.value })}
+      />
+      <input
+        placeholder="Total Marks"
+        value={examDetails.totalMarks}
+        onChange={(e) => setExamDetails({ ...examDetails, totalMarks: e.target.value })}
+      />
 
       <div className="question-form">
-        <input placeholder="Question" value={question.text} onChange={(e) => setQuestion({ ...question, text: e.target.value })} />
+        <h4>Add Question</h4>
+        <input
+          placeholder="Question"
+          value={question.text}
+          onChange={(e) => setQuestion({ ...question, text: e.target.value })}
+        />
         {question.options.map((opt, i) => (
-          <input key={i} placeholder={`Option ${i + 1}`} value={opt} onChange={(e) => handleQuestionChange(i, e.target.value)} />
+          <input
+            key={`opt-${i}`}
+            placeholder={`Option ${i + 1}`}
+            value={opt}
+            onChange={(e) => handleQuestionChange(i, e.target.value)}
+          />
         ))}
-        <input placeholder="Correct Answer" value={question.correctAnswer} onChange={(e) => setQuestion({ ...question, correctAnswer: e.target.value })} />
+        <input
+          placeholder="Correct Answer"
+          value={question.correctAnswer}
+          onChange={(e) => setQuestion({ ...question, correctAnswer: e.target.value })}
+        />
         <button onClick={addQuestion}>Add Question</button>
       </div>
 
       <div className="question-preview">
         <h4>Preview Questions</h4>
         {examDetails.questions.map((q, idx) => (
-          <div key={idx}>
+          <div key={`question-${idx}`}>
             <strong>{q.text}</strong>
             <ul>
-              {q.options.map((opt, i) => <li key={i}>{opt}</li>)}
+              {q.options.map((opt, i) => <li key={`opt-${idx}-${i}`}>{opt}</li>)}
             </ul>
             <small>Correct: {q.correctAnswer}</small>
           </div>
@@ -126,10 +170,10 @@ const CreateExamPage = () => {
           <div className="modal-content">
             <h3>Preview: {previewExam.subject}</h3>
             {previewExam.questions.map((q, i) => (
-              <div key={i}>
+              <div key={`prev-${i}`}>
                 <strong>{q.text}</strong>
                 <ul>
-                  {q.options.map((opt, j) => <li key={j}>{opt}</li>)}
+                  {q.options.map((opt, j) => <li key={`prev-opt-${i}-${j}`}>{opt}</li>)}
                 </ul>
                 <small>Correct: {q.correctAnswer}</small>
               </div>

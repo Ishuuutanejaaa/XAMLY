@@ -1,3 +1,4 @@
+// src/Components/CreateExam/CreateExam.js
 import React, { useState, useEffect } from 'react';
 import './CreateExam.css';
 
@@ -45,33 +46,50 @@ const CreateExamPage = () => {
 
     const method = isEditing ? 'PUT' : 'POST';
 
-    const res = await fetch(endpoint, {
-      method,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(examDetails)
-    });
+    try {
+      const res = await fetch(endpoint, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(examDetails)
+      });
 
-    const data = await res.json();
-    if (res.ok) {
-      alert(`Exam ${isEditing ? 'updated' : 'created'} successfully`);
-      fetchExams();
-      setExamDetails({ subject: '', duration: '', totalMarks: '', questions: [] });
-      setIsEditing(false);
-      setEditingExamId(null);
-    } else {
-      alert(data.message || 'Error occurred');
+      const data = await res.json();
+      if (res.ok) {
+        alert(`Exam ${isEditing ? 'updated' : 'created'} successfully`);
+        fetchExams();
+        setExamDetails({ subject: '', duration: '', totalMarks: '', questions: [] });
+        setIsEditing(false);
+        setEditingExamId(null);
+      } else {
+        alert(data.message || 'Error occurred');
+      }
+    } catch (err) {
+      alert('Failed to submit exam. Please check server.');
+      console.error(err);
     }
   };
 
   const toggleVisibility = async (id) => {
-    await fetch(`http://localhost:5000/api/exams/toggle-visibility/${id}`, { method: 'PUT' });
-    fetchExams();
+    try {
+      await fetch(`http://localhost:5000/api/exams/toggle-visibility/${id}`, { method: 'PUT' });
+      fetchExams();
+    } catch (err) {
+      console.error('Error toggling visibility:', err);
+    }
   };
 
   const fetchExams = async () => {
-    const res = await fetch('http://localhost:5000/api/exams/teacher');
-    const data = await res.json();
-    setExams(data);
+    try {
+      const res = await fetch('http://localhost:5000/api/exams/teacher');
+      if (!res.ok) {
+        throw new Error('Failed to fetch exams');
+      }
+      const data = await res.json();
+      setExams(data);
+    } catch (err) {
+      console.error('Error fetching exams:', err);
+      alert('Could not load exams. Please try again later.');
+    }
   };
 
   const handleEdit = (exam) => {

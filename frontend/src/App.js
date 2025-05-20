@@ -7,6 +7,7 @@ import CreateExamPage from './Components/CreateExam/CreateExam';
 import TakeExam from './Components/TakeExam/TakeExam';
 import ViewResults from './Components/ViewResults/ViewResults';
 import ViewAnalytics from './Components/ViewAnalytics/ViewAnalytics';
+import GetCertificate from './Components/GetCertificate/GetCertificate';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/take-exam" element={<TakeExam />} />
         <Route path="/results" element={<ViewResults />} />
         <Route path="/view-analytics" element={<ViewAnalytics />} />
+        <Route path="/certificate" element={<GetCertificate />} />
 
       </Routes>
     </Router>

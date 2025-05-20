@@ -7,6 +7,7 @@ const examRoutes = require('./routes/examRoutes');
 const submissionRoutes = require('./routes/submissionRoutes');
 const analyticsRoutes = require('./routes/analyticsRoutes');
 const resultRoutes = require('./routes/resultRoutes');
+const certificateRoutes = require('./routes/certificateRoutes');
 
 
 
@@ -25,7 +26,7 @@ app.use('/api/exams', examRoutes);
 app.use('/api/submissions', submissionRoutes);
 app.use('/api/results', resultRoutes);
 app.use('/api/analytics', analyticsRoutes);
-
+app.use('/api/certificate', certificateRoutes);
 
 
 

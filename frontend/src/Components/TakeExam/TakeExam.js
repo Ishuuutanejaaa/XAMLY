@@ -4,11 +4,12 @@ import './TakeExam.css';
 const TakeExam = () => {
   const [exams, setExams] = useState([]);
   const [selectedExam, setSelectedExam] = useState(null);
+  const [student, setStudent] = useState({ name: '', roll: '' });
   const [answers, setAnswers] = useState({});
   const [timeLeft, setTimeLeft] = useState(null);
   const [submitted, setSubmitted] = useState(false);
+  const [examStarted, setExamStarted] = useState(false);
 
-  // Fetch visible exams
   useEffect(() => {
     const fetchExams = async () => {
       try {
@@ -16,14 +17,13 @@ const TakeExam = () => {
         const data = await res.json();
         setExams(data);
       } catch (err) {
-        console.error(err);
         alert('Failed to fetch exams');
+        console.error(err);
       }
     };
     fetchExams();
   }, []);
 
-  // Timer logic
   useEffect(() => {
     if (!timeLeft || submitted) return;
     const timer = setInterval(() => {
@@ -41,7 +41,15 @@ const TakeExam = () => {
 
   const handleSelectExam = (exam) => {
     setSelectedExam(exam);
-    setTimeLeft(parseInt(exam.duration) * 60); // convert mins to seconds
+  };
+
+  const startExam = () => {
+    if (!student.name || !student.roll) {
+      alert('Please enter your name and roll number');
+      return;
+    }
+    setTimeLeft(parseInt(selectedExam.duration) * 60);
+    setExamStarted(true);
     setAnswers({});
     setSubmitted(false);
   };
@@ -50,9 +58,27 @@ const TakeExam = () => {
     setAnswers({ ...answers, [questionIndex]: option });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setSubmitted(true);
     alert('Exam submitted!');
+
+    const payload = {
+      examId: selectedExam._id,
+      examSubject: selectedExam.subject,
+      studentName: student.name,
+      studentRoll: student.roll,
+      answers
+    };
+
+    try {
+      await fetch('http://localhost:5000/api/submissions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } catch (err) {
+      console.error('Failed to save submission:', err);
+    }
   };
 
   const formatTime = (seconds) => {
@@ -64,6 +90,7 @@ const TakeExam = () => {
   return (
     <div className="take-exam-container">
       <h2>Available Exams</h2>
+
       {!selectedExam && (
         <div className="exam-list">
           {exams.map((exam) => (
@@ -71,13 +98,32 @@ const TakeExam = () => {
               <h3>{exam.subject}</h3>
               <p>Duration: {exam.duration} mins</p>
               <p>Total Marks: {exam.totalMarks}</p>
-              <button onClick={() => handleSelectExam(exam)}>Start Exam</button>
+              <button onClick={() => handleSelectExam(exam)}>Take Exam</button>
             </div>
           ))}
         </div>
       )}
 
-      {selectedExam && (
+      {selectedExam && !examStarted && (
+        <div className="student-info-form">
+          <h3>{selectedExam.subject} - Exam Login</h3>
+          <input
+            type="text"
+            placeholder="Enter your name"
+            value={student.name}
+            onChange={(e) => setStudent({ ...student, name: e.target.value })}
+          />
+          <input
+            type="text"
+            placeholder="Enter your roll number"
+            value={student.roll}
+            onChange={(e) => setStudent({ ...student, roll: e.target.value })}
+          />
+          <button onClick={startExam}>Start Exam</button>
+        </div>
+      )}
+
+      {selectedExam && examStarted && (
         <div className="exam-screen">
           <h3>{selectedExam.subject} - Exam</h3>
           <div className="timer">Time Left: {formatTime(timeLeft)}</div>
@@ -115,3 +161,4 @@ const TakeExam = () => {
 };
 
 export default TakeExam;
+

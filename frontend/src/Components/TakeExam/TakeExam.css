@@ -5,19 +5,31 @@
 
 .exam-list {
   display: flex;
+  gap: 20px;
   flex-wrap: wrap;
-  gap: 16px;
 }
 
 .exam-card {
   border: 1px solid #ccc;
   padding: 16px;
   border-radius: 8px;
-  width: 200px;
+  width: 220px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .exam-card button {
+  margin-top: 10px;
+}
+
+.student-info-form input {
+  display: block;
+  margin: 10px 0;
+  padding: 8px;
+  width: 250px;
+}
+
+.student-info-form button {
+  padding: 10px 20px;
   margin-top: 10px;
 }
 
@@ -37,13 +49,15 @@
 
 .submit-btn {
   padding: 10px 20px;
-  background-color: #1e90ff;
+  background-color: #007bff;
   color: white;
   border: none;
   border-radius: 5px;
 }
 
 .thank-you {
-  font-weight: bold;
   color: green;
+  font-weight: bold;
+  margin-top: 20px;
 }
+

@@ -1,0 +1,25 @@
+.view-analytics-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.view-analytics-container h2 {
+  margin-bottom: 20px;
+}
+
+.view-analytics-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.view-analytics-container th,
+.view-analytics-container td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+}
+
+.view-analytics-container th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}

@@ -5,6 +5,8 @@ const userRoutes = require('./routes/userRoutes');
 const issueRoutes = require('./routes/issueRoutes');
 const examRoutes = require('./routes/examRoutes');
 const submissionRoutes = require('./routes/submissionRoutes');
+const analyticsRoutes = require('./routes/analyticsRoutes');
+const resultRoutes = require('./routes/resultRoutes');
 
 
 
@@ -21,6 +23,8 @@ app.use('/api/users', userRoutes);
 app.use('/api/issues', issueRoutes);
 app.use('/api/exams', examRoutes);
 app.use('/api/submissions', submissionRoutes);
+app.use('/api/results', resultRoutes);
+app.use('/api/analytics', analyticsRoutes);
 
 
 

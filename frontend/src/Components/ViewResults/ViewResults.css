@@ -1,0 +1,31 @@
+.view-results-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.view-results-container input {
+  padding: 8px;
+  margin-right: 10px;
+}
+
+.view-results-container button {
+  padding: 8px 16px;
+}
+
+.view-results-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.view-results-container th,
+.view-results-container td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.view-results-container th {
+  background-color: #f2f2f2;
+}
+

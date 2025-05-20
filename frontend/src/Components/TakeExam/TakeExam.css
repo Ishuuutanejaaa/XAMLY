@@ -1,0 +1,49 @@
+.take-exam-container {
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+.exam-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.exam-card {
+  border: 1px solid #ccc;
+  padding: 16px;
+  border-radius: 8px;
+  width: 200px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.exam-card button {
+  margin-top: 10px;
+}
+
+.exam-screen {
+  margin-top: 20px;
+}
+
+.timer {
+  font-weight: bold;
+  color: red;
+  margin-bottom: 20px;
+}
+
+.question-block {
+  margin-bottom: 20px;
+}
+
+.submit-btn {
+  padding: 10px 20px;
+  background-color: #1e90ff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.thank-you {
+  font-weight: bold;
+  color: green;
+}

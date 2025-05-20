@@ -4,6 +4,8 @@ import Register from './Components/Register';
 import StudentDashboard from './Components/Dashboards/StudentDashboard';
 import TeacherHome from './Components/Dashboards/TeacherDashboard';
 import CreateExamPage from './Components/CreateExam/CreateExam';
+import TakeExam from './Components/TakeExam/TakeExam';
+
 
 function App() {
   return (
@@ -14,7 +16,7 @@ function App() {
         <Route path="/student-home" element={<StudentDashboard />} />
         <Route path="/teacher-home" element={<TeacherHome />} />
         <Route path="/create-exam" element={<CreateExamPage />} />
-        
+        <Route path="/take-exam" element={<TakeExam />} />
 
       </Routes>
     </Router>

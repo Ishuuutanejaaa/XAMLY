@@ -46,3 +46,14 @@ exports.toggleVisibility = async (req, res) => {
     res.status(500).json({ message: 'Error toggling visibility.' });
   }
 };
+
+// Get visible exams (for students)
+exports.getVisibleExams = async (req, res) => {
+  try {
+    const visibleExams = await Exam.find({ visibleToStudents: true });
+    res.json(visibleExams);
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to fetch visible exams.' });
+  }
+};
+

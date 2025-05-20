@@ -14,4 +14,8 @@ router.put('/update/:id', examController.updateExam);
 // Toggle visibility
 router.put('/toggle-visibility/:id', examController.toggleVisibility);
 
+// Get visible exams for students
+router.get('/visible', examController.getVisibleExams);
+
+
 module.exports = router;

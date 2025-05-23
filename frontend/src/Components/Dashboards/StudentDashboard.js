@@ -38,7 +38,6 @@ const StudentDashboard = () => {
           <button onClick={() => navigate('/take-exam')}>Take Exam</button>
           <button onClick={() => navigate('/results')}>View Results</button>
           <button onClick={() => navigate('/certificate')}>Download Certificate</button>
-          <button onClick={() => navigate('/past-exams')}>Past Exams</button>
         </div>
       </nav>
 

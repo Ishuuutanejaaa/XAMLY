@@ -12,7 +12,6 @@ const TeacherDashboard = () => {
         <nav>
           <ul>
             <li onClick={() => navigate('/create-exam')}>Create Exam</li>
-            <li onClick={() => navigate('/evaluate-answers')}>Evaluate</li>
             <li onClick={() => navigate('/view-analytics')}>Analytics</li>
           </ul>
         </nav>
@@ -30,11 +29,7 @@ const TeacherDashboard = () => {
           <p>Design and publish exams using a powerful question builder.</p>
         </div>
 
-        <div className="card" onClick={() => navigate('/evaluate-answers')}>
-          <img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png" alt="Evaluate Answers" />
-          <h3>Evaluate Answers</h3>
-          <p>Grade subjective responses and assign scores to students.</p>
-        </div>
+      
 
         <div className="card" onClick={() => navigate('/view-analytics')}>
           <img src="https://cdn-icons-png.flaticon.com/512/1828/1828885.png" alt="View Analytics" />
